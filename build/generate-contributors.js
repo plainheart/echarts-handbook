@@ -93,7 +93,7 @@ async function ghWeb() {
           let contributors
           const avatars = $('a.avatar-link .avatar-user')
           if (avatars.length) {
-            contributors = avatars.map((i, avatar) => avatar.attr('alt').slice(1))
+            contributors = avatars.map((i, avatar) => $(avatar).attr('alt').slice(1))
           } else {
             contributors = [$('a[rel=contributor] .avatar-user').attr('alt').slice(1)]
           }
@@ -106,6 +106,7 @@ async function ghWeb() {
     })(i)
   }
   await Promise.allSettled(tasks)
+  console.log(entries)
   writeToFile()
 }
 
