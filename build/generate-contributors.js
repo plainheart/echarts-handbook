@@ -95,7 +95,8 @@ async function ghWeb() {
           if (avatars.length) {
             contributors = avatars.map((i, avatar) => $(avatar).attr('alt').slice(1)).toArray()
           } else {
-            contributors = [$('a[rel=contributor] .avatar-user').attr('alt').slice(1)]
+            const avatar = $('a[rel=contributor] .avatar-user').attr('alt')
+            contributors = avatar ? [avatar.slice(1)] : []
           }
           entries[path] = contributors
           console.log('fetched contributors of path', path, contributors)
