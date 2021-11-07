@@ -84,8 +84,9 @@ async function ghWeb() {
   const tasks = new Array(total)
   for (let i = 0; i < total; ++i) {
     ((i) => {
+      const path = paths[i].slice(2)
       console.log('fetching contributors of path', path)
-      tasks[i] = fetch(GH_REPO_URL + paths[i])
+      tasks[i] = fetch(GH_REPO_URL + path)
         .then(response => response.text())
         .then(html => {
           const $ = cheerio.load(html)
@@ -100,7 +101,7 @@ async function ghWeb() {
           console.log('fetched contributors of path', path, contributors)
         })
         .catch(e => {
-          console.error('failed to fetch contributors of path', paths[i], e)
+          console.error('failed to fetch contributors of path', path, e)
         })
     })(i)
   }
